@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+model foods {
+  date     Int
+  id       String @unique
+  name     String
+  quantity String
+  shelf    String
+}
+
+// enum 사용에 대해 더 알아봐야 함
