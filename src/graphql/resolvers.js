@@ -18,6 +18,11 @@ const resolvers = {
           quantity,
           shelf,
           date,
+          fridge: {
+            connect: {
+              id: "abc",
+            },
+          },
         },
       });
       return newFood;
