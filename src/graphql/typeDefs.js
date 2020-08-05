@@ -9,6 +9,7 @@ const typeDefs = gql`
     quantity: String!
     date: Int!
     shelf: String!
+    fridgeId: String
   }
 
   type Query {
