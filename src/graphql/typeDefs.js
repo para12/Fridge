@@ -10,6 +10,21 @@ const typeDefs = gql`
     date: Int!
     shelf: String!
     fridgeId: String
+    fridge: Fridge
+  }
+
+  type Fridge {
+    id: String
+    name: String
+    foods: [Food]
+    users: [User]
+  }
+
+  type User {
+    email: String
+    fridgeID: String
+    id: String
+    fridge: Fridge
   }
 
   type Query {
