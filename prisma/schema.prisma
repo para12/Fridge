@@ -7,12 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model foods {
+model Food {
   date     Int
-  id       String @unique
+  fridgeID String
+  id       String  @unique
   name     String
   quantity String
   shelf    String
+  fridge   Fridge @relation(fields: [fridgeID], references: [id])
 }
 
-// enum 사용에 대해 더 알아봐야 함
+model Fridge {
+  id   String @unique
+  name String
+  foods Food[]
+  users User[]
+}
+
+model User {
+  email    String
+  fridgeID String
+  id       String  @id
+  fridge   Fridge @relation(fields: [fridgeID], references: [id])
+}

@@ -5,13 +5,13 @@ const prisma = new PrismaClient();
 const resolvers = {
   Query: {
     allFoods: async () => {
-      const allFoods = await prisma.foods.findMany();
+      const allFoods = await prisma.food.findMany();
       return allFoods;
     },
   },
   Mutation: {
     addFood: async (_, { id, name, quantity, shelf, date }) => {
-      const newFood = await prisma.foods.create({
+      const newFood = await prisma.food.create({
         data: {
           id,
           name,
@@ -23,13 +23,13 @@ const resolvers = {
       return newFood;
     },
     deleteFood: async (_, { id }) => {
-      const deletedFood = await prisma.foods.delete({
+      const deletedFood = await prisma.food.delete({
         where: { id },
       });
       return deletedFood;
     },
     updateQuantity: async (_, { id, quantity }) => {
-      const quantityUpdateFood = await prisma.foods.update({
+      const quantityUpdateFood = await prisma.food.update({
         data: { quantity },
         where: { id },
       });
