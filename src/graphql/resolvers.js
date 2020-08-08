@@ -83,8 +83,8 @@ const resolvers = {
             },
           });
         }
-        return jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-        // return jwt.sign({ id: user.id }, "secret");
+        // return jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+        return jwt.sign({ id: user.id }, "secret");
       } else {
         throw Error("Wrong email/secrect combination");
       }
