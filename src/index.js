@@ -20,8 +20,8 @@ app.use(logger("dev"));
 app.use(authenticateJWT);
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    // origin: process.env.ORIGIN,
+    // origin: "http://localhost:3000",
+    origin: process.env.ORIGIN,
   })
 );
 server.applyMiddleware({ app });
