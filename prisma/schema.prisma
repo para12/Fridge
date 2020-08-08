@@ -9,7 +9,7 @@ datasource db {
 
 model Food {
   date     Int
-  fridgeID String
+  fridgeID String 
   id       String  @unique
   name     String
   quantity String
@@ -25,8 +25,9 @@ model Fridge {
 }
 
 model User {
-  email    String
-  fridgeID String
+  email    String @unique
+  fridgeID String? 
   id       String  @id
-  fridge   Fridge @relation(fields: [fridgeID], references: [id])
+  fridge   Fridge? @relation(fields: [fridgeID], references: [id])
+  loginSecret String
 }

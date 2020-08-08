@@ -25,10 +25,12 @@ const typeDefs = gql`
     fridgeID: String
     id: String
     fridge: Fridge
+    loginSecret: String
   }
 
   type Query {
     allFoods: [Food!]!
+    userlist: [User!]!
   }
 
   type Mutation {
@@ -41,6 +43,10 @@ const typeDefs = gql`
     ): Food!
     deleteFood(id: String!): Food!
     updateQuantity(id: String!, quantity: String!): Food!
+    confirmSecret(secret: String!, email: String!): String!
+    createAccount(email: String): Boolean!
+    requestSecret(email: String): Boolean!
+    shareFridge(email: String): User!
   }
 `;
 

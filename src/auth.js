@@ -1,6 +1,8 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-// import "./env";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const jwtOptions = {
   // header에 bearer스키마에 담겨온 토큰 해석할 것
@@ -11,9 +13,8 @@ const jwtOptions = {
 };
 
 const verifyUser = async (payload, done) => {
-  console.log("payload", payload);
   try {
-    const user = await prisma.user({ id: payload.id });
+    const user = await prisma.user.findOne({ where: { id: payload.id } });
     // user가 있을 경우
     if (user) {
       return done(null, user);
@@ -25,9 +26,8 @@ const verifyUser = async (payload, done) => {
   }
 };
 
-export const authenticateJWt = (req, res, next) =>
+export const authenticateJWT = (req, res, next) =>
   passport.authenticate("jwt", { session: false }, (error, user) => {
-    // console.log(user);
     if (user) {
       req.user = user;
     }
@@ -36,3 +36,10 @@ export const authenticateJWt = (req, res, next) =>
 
 passport.use(new JwtStrategy(jwtOptions, verifyUser));
 passport.initialize();
+
+export const isAuthenticated = (req) => {
+  if (!req.user) {
+    throw Error("You need to log in");
+  }
+  return;
+};
