@@ -63,25 +63,27 @@ const resolvers = {
     confirmSecret: async (_, { email, secret }) => {
       const user = await prisma.user.findOne({ where: { email } });
       if (user.loginSecret === secret) {
-        const tempId = uuidv4();
-        await prisma.fridge.create({
-          data: {
-            id: tempId,
-            name: "other",
-          },
-        });
-        await prisma.user.update({
-          where: { id: user.id },
-          data: {
-            loginSecret: "",
-            fridge: {
-              connect: {
-                id: tempId,
+        if (user.fridgeID === "") {
+          const tempId = uuidv4();
+          await prisma.fridge.create({
+            data: {
+              id: tempId,
+              name: "other",
+            },
+          });
+          await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              loginSecret: "",
+              fridge: {
+                connect: {
+                  id: tempId,
+                },
               },
             },
-          },
-        });
-        return jwt.sign({ id: user.id }, "secret");
+          });
+        }
+        return jwt.sign({ id: user.id }, process.env.JWT_SECRET);
       } else {
         throw Error("Wrong email/secrect combination");
       }
@@ -94,7 +96,7 @@ const resolvers = {
       const loginSecret = String(Math.floor(Math.random() * 10000));
       await sendSecretMail(email, loginSecret);
       await prisma.user.create({
-        data: { id: uuidv4(), email, loginSecret },
+        data: { id: uuidv4(), email, loginSecret, fridgeID: "" },
       });
       return true;
     },
