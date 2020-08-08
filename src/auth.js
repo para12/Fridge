@@ -8,7 +8,7 @@ const jwtOptions = {
   // header에 bearer스키마에 담겨온 토큰 해석할 것
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   // 해당 복호화 방법사용
-  secretOrKey: process.env.JWT_SECERT,
+  secretOrKey: process.env.JWT_SECRET,
   // secretOrKey: "secret",
 };
 
