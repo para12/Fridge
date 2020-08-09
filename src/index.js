@@ -13,6 +13,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req, isAuthenticated }),
+  playground: true,
 });
 
 const app = express();
