@@ -97,7 +97,7 @@ const resolvers = {
       const loginSecret = String(Math.floor(Math.random() * 10000));
       await sendSecretMail(email, loginSecret);
       await prisma.user.create({
-        data: { id: uuidv4(), email, loginSecret, fridgeID: "" },
+        data: { id: uuidv4(), email, loginSecret },
       });
       return true;
     },
