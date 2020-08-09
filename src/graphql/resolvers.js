@@ -63,7 +63,7 @@ const resolvers = {
     confirmSecret: async (_, { email, secret }) => {
       const user = await prisma.user.findOne({ where: { email } });
       if (user.loginSecret === secret) {
-        if (user.fridgeID === "") {
+        if (user.fridgeID === NULL) {
           const tempId = uuidv4();
           await prisma.fridge.create({
             data: {
