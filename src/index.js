@@ -19,12 +19,13 @@ const app = express();
 app.use(logger("dev"));
 app.use(authenticateJWT);
 app.use(
-  cors({
-    origin: "http://localhost:3000",
-    // origin: process.env.ORIGIN,
-    // origin: "*",
-    // origin: "https://fridge.netlify.app/",
-  })
+  cors()
+  // {
+  // origin: "http://localhost:3000",
+  // origin: process.env.ORIGIN,
+  // origin: "*",
+  // origin: "https://fridge.netlify.app/",
+  // }
 );
 server.applyMiddleware({ app });
 
