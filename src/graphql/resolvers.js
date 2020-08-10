@@ -144,10 +144,9 @@ const resolvers = {
     },
     shareFridge: async (_, { email }, { req, isAuthenticated }) => {
       isAuthenticated(req);
-      console.log(email, req.user.fridgeID);
       const userToBeShared = await prisma.user.findOne({ where: { email } });
       if (!userToBeShared) {
-        throw Error(`no user with email ${email}`);
+        return false;
       }
       const updatedUser = await prisma.user.update({
         where: { email },
@@ -159,7 +158,7 @@ const resolvers = {
           },
         },
       });
-      return updatedUser;
+      return true;
     },
   },
 };

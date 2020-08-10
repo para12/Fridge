@@ -46,7 +46,7 @@ const typeDefs = gql`
     confirmSecret(secret: String!, email: String!): String!
     createAccount(email: String): Boolean!
     requestSecret(email: String): Boolean!
-    shareFridge(email: String): User!
+    shareFridge(email: String): Boolean!
   }
 `;
 
