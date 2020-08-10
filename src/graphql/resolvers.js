@@ -144,6 +144,7 @@ const resolvers = {
     },
     shareFridge: async (_, { email }, { req, isAuthenticated }) => {
       isAuthenticated(req);
+      console.log(email);
       const userToBeShared = await prisma.user.findOne({ where: { email } });
       if (!userToBeShared) {
         throw Error(`no user with email ${email}`);
