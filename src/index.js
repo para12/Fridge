@@ -1,4 +1,10 @@
 //test1
+<<<<<<< HEAD
+=======
+//branch test
+//branch test2
+//branch test3
+>>>>>>> testBranch
 
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
